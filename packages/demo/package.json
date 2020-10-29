@@ -1,0 +1,27 @@
+{
+  "name": "react-multi-threaded-demo",
+  "version": "1.0.0",
+  "description": "a demo for react-multi-threaded",
+  "main": "none",
+  "author": "shmuelhizmi",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "webpack-dev-server"
+  },
+  "dependencies": {
+    "react-multi-threaded": "0.0.1",
+    "react": "16.13.1",
+    "react-dom": "16.13.1"
+  },
+  "devDependencies": {
+    "typescript": "4.0.5",
+    "source-map-loader": "1.1.0",
+    "webpack": "4.44.2",
+    "webpack-cli": "3.3.12",
+    "webpack-dev-server": "3.11.0",
+    "ts-loader": "8.0.4",
+    "@types/react": "16.8.24",
+    "@types/react-dom": "16.9.9"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "react-multi-threaded",
+  "version": "0.0.1",
+  "description": "seperate your react-app into web-workers",
+  "main": "lib/index.js",
+  "author": "shmuelhizmi",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "tsc"
+  },
+  "devDependencies": {
+    "typescript": "4.0.5",
+    "@types/react": "16.8.24",
+    "@types/react-dom": "16.9.9",
+    "@types/uuid": "3.4.3"
+  },
+  "dependencies": {
+    "uuid": "8.3.0",
+    "@react-fullstack/render": "0.1.21"
+  },
+  "peerDependencies": {
+    "react": ">=16.0.0",
+    "react-dom": ">=16.0.0"
+  }
+}
