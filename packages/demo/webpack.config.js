@@ -7,6 +7,7 @@ module.exports = {
     worker: path.join(__dirname, "src", "index.tsx"),
   },
   target: "web",
+  mode: "development",
   resolve: {
     extensions: [".ts", ".tsx", ".js"],
     alias: {
@@ -21,7 +22,11 @@ module.exports = {
         use: "ts-loader",
         exclude: "/node_modules/",
       },
-      { test: /\.[tj]s$/, loader: "source-map-loader", enforce: "pre" },
+      {
+        enforce: "pre",
+        test: /\.js$/,
+        loader: "source-map-loader",
+      },
     ],
   },
   output: {
