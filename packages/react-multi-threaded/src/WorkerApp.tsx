@@ -204,11 +204,11 @@ class App {
     };
   }
 }
-const RenderApp = (appTree: JSX.Element) => {
-  const transport = createTransport();
+const RenderApp = (appTree: JSX.Element, transport?: AppTransport) => {
+  const appTransport = transport || createTransport();
   const app = new App(appTree);
-  app.addClient(transport);
-  app.startServer(transport);
+  app.addClient(appTransport);
+  app.startServer(appTransport);
   return {
     pause: app.pauseApp,
     continue: app.resumeApp,

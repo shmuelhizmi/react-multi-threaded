@@ -1,6 +1,6 @@
-import { tranportBroadcastName } from "./types";
+import { AppTransport, tranportBroadcastName } from "./types";
 
-const createTransport = () => {
+const createTransport = (): AppTransport => {
   const transport = new BroadcastChannel(tranportBroadcastName);
   return {
     emit: (event: string, message: any) => transport.postMessage({ event, message }),

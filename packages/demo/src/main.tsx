@@ -1,4 +1,9 @@
-import { createClient } from "react-multi-threaded";
+import React from "react";
+import { render } from "react-dom";
+import { MainThreadClient } from "react-multi-threaded";
 import Components from "./components/UI";
 
-createClient(Components, document.getElementById("main"));
+render(
+  <MainThreadClient UIComponents={Components} />,
+  document.getElementById("main")
+);

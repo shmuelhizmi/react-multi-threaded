@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import { ShareableViewData } from "../WorkerApp";
 import { AppTransport } from "../types";
 import UIComponent, { UIComponentClass } from "./UIComponent";
+import { createTransport } from "../Transport";
 
 interface ClientState {
   runningViews: ShareableViewData[];
@@ -27,22 +28,23 @@ const stringifyWithoutCircular = (json: any) => {
 };
 class Client extends React.Component<
   {
-    transport: AppTransport;
-    views: UIComponentClass<new (props: any) => React.Component>[];
+    transport?: AppTransport;
+    UIComponents: UIComponentClass<new (props: any) => React.Component>[];
   },
   ClientState
 > {
   state: ClientState = {
     runningViews: [],
   };
+  transport = this.props.transport || createTransport()
   componentDidMount() {
-    this.props.transport.on(
+    this.transport.on(
       "update_views_tree",
       ({ views }: { views: ShareableViewData[] }) => {
         this.setState({ runningViews: views });
       }
     );
-    this.props.transport.on(
+    this.transport.on(
       "update_view",
       ({ view }: { view: ShareableViewData }) => {
         this.setState((state) => {
@@ -58,7 +60,7 @@ class Client extends React.Component<
         });
       }
     );
-    this.props.transport.on(
+    this.transport.on(
       "delete_view",
       ({ viewUid }: { viewUid: string }) => {
         this.setState((state) => {
@@ -72,12 +74,12 @@ class Client extends React.Component<
         });
       }
     );
-    this.props.transport.on("on_worker_start", () => {
-      this.props.transport.emit("request_views_tree");
+    this.transport.on("on_worker_start", () => {
+      this.transport.emit("request_views_tree");
     });
   }
   renderView(view: ShareableViewData): JSX.Element {
-    const componentToRender = this.props.views.find(
+    const componentToRender = this.props.UIComponents.find(
       (component) => component.name === view.name
     );
     if (componentToRender) {
@@ -90,7 +92,7 @@ class Client extends React.Component<
             (props[prop.name] = (...args: any) => {
               return new Promise((resolve) => {
                 const requestUid = v4();
-                this.props.transport.on(
+                this.transport.on(
                   "respond_to_event",
                   ({
                     data,
@@ -106,7 +108,7 @@ class Client extends React.Component<
                     }
                   }
                 );
-                this.props.transport.emit("request_event", {
+                this.transport.emit("request_event", {
                   eventArguments: JSON.parse(stringifyWithoutCircular(args)),
                   eventUid: prop.uid,
                   uid: requestUid,
