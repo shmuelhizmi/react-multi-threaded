@@ -2,9 +2,9 @@ import React from "react";
 import { v4 } from "uuid";
 import { ShareableViewData } from "../WorkerApp";
 import { AppTransport } from "../types";
-import UIComponent, { UIComponentClass } from "./UIComponent";
 import { createTransport } from "../Transport";
-
+import { AnyComponent } from "./UIComponent";
+import RootReactMultiThreadedComponent from "./RootComponent";
 interface ClientState {
   runningViews: ShareableViewData[];
 }
@@ -29,14 +29,17 @@ const stringifyWithoutCircular = (json: any) => {
 class Client extends React.Component<
   {
     transport?: AppTransport;
-    UIComponents: UIComponentClass<new (props: any) => React.Component>[];
+    UIComponents: AnyComponent<any>[];
   },
   ClientState
 > {
   state: ClientState = {
     runningViews: [],
   };
-  transport = this.props.transport || createTransport()
+  private transport = this.props.transport || createTransport();
+  private get UIComponents() {
+    return [...this.props.UIComponents, RootReactMultiThreadedComponent];
+  }
   componentDidMount() {
     this.transport.on(
       "update_views_tree",
@@ -60,26 +63,23 @@ class Client extends React.Component<
         });
       }
     );
-    this.transport.on(
-      "delete_view",
-      ({ viewUid }: { viewUid: string }) => {
-        this.setState((state) => {
-          const runningViewIndex = state.runningViews.findIndex(
-            (view) => view.uid === viewUid
-          );
-          if (runningViewIndex !== -1) {
-            state.runningViews.splice(runningViewIndex, 1);
-            return { runningViews: [...state.runningViews] };
-          }
-        });
-      }
-    );
+    this.transport.on("delete_view", ({ viewUid }: { viewUid: string }) => {
+      this.setState((state) => {
+        const runningViewIndex = state.runningViews.findIndex(
+          (view) => view.uid === viewUid
+        );
+        if (runningViewIndex !== -1) {
+          state.runningViews.splice(runningViewIndex, 1);
+          return { runningViews: [...state.runningViews] };
+        }
+      });
+    });
     this.transport.on("on_worker_start", () => {
       this.transport.emit("request_views_tree");
     });
   }
   renderView(view: ShareableViewData): JSX.Element {
-    const componentToRender = this.props.UIComponents.find(
+    const componentToRender = this.UIComponents.find(
       (component) => component.name === view.name
     );
     if (componentToRender) {

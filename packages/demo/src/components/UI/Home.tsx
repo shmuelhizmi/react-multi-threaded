@@ -1,16 +1,16 @@
 import React from "react";
-import { UIComponent, AsUIComponent } from "react-multi-threaded";
+import { UIComponentProps, AsUIComponent } from "react-multi-threaded";
 
-class Home extends UIComponent<{ username: string; logout: () => void }> {
-  render() {
-    return (
+
+const Home = (props: UIComponentProps<{ username: string; logout: () => void }>) => {
+  return (
       <div>
-        <h1>Hello - {this.props.username}</h1>
-        {this.props.children}
-        <button onClick={() => this.props.logout()}>logout</button>
+        <h1>Hello - {props.username}</h1>
+        {props.children}
+        <button onClick={() => props.logout()}>logout</button>
       </div>
-    );
-  }
+
+  )
 }
 
 export default AsUIComponent(Home);

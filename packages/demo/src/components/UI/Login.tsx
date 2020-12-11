@@ -1,8 +1,8 @@
 import React from "react";
-import { UIComponent, AsUIComponent } from "react-multi-threaded";
+import { UIComponentProps, AsUIComponent } from "react-multi-threaded";
 
-class Login extends UIComponent<
-  { login: (username: string, password: string) => void },
+class Login extends React.Component<
+  UIComponentProps<{ login: (username: string, password: string) => void }>,
   { username: string; password: string }
 > {
   state = {

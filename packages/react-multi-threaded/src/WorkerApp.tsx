@@ -4,6 +4,7 @@ import { WorkerAppContext, AppTypeContext } from "./Contexts";
 import { AppTransport } from "./types";
 import { Render } from "@react-fullstack/render";
 import { createTransport } from "./Transport";
+import RootReactMultiThreadedComponent from "./components/RootComponent";
 
 type ViewDataBase = {
   uid: string;
@@ -55,11 +56,13 @@ class App {
     this.reactTreeController = Render(
       <WorkerAppContext.Provider value={this}>
         <AppTypeContext.Provider value={"worker"}>
-          {this.appTree}
+          <RootReactMultiThreadedComponent>
+            {this.appTree}
+          </RootReactMultiThreadedComponent>
         </AppTypeContext.Provider>
       </WorkerAppContext.Provider>
-	);
-	this.server.emit("on_worker_start")
+    );
+    this.server.emit("on_worker_start");
   }
   public pauseApp = () => {
     if (this.reactTreeController) {
