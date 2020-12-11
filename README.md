@@ -7,22 +7,22 @@
 
 ## What is "React Multi-Threaded"
 
-"React Multi-Threaded" is a typescript framework that lets you transform your existing/new React-App from a single-threaded Web-App into a multi-threaded faster Web-App.
+"React Multi-Threaded" is a (type/java)script framework that lets you transform your existing/new React-App from a single-threaded Web-App into a multi-threaded faster Web-App.
 
 ## How does it work?
 
 In "React Multi-Threaded" you have two different types of components
 
-- UI Component - UI Components are components that run on the main thread since every interaction with the dom must be fired from the main thread.
-- Layout/Logic Component - Layout/Logic-Components are components that run on the web-worker thread they are used for data fetching, logic, and layouts.
+- UI Component - UI Components are React components that run on the main thread, they run there since dom interactions must come from the main thread.
+- Layout/Logic Component - Layout/Logic-Components are components that run on the web-worker thread, they are used for data fetching, business logic, and high level layouts.  
 
-with "React Multi-Threaded" you can build your app from a mix of those two types of components and "React Multi-Threaded" will separate them into
-one UI thread with your UI Components and one business logic web-worker thread with your Layout/Logic Components
+with "React Multi-Threaded" you can build your app from a mix of those two types of components and "React Multi-Threaded" will separate them into 2 threads, one UI thread with your UI Components and one business logic web-worker thread with your Layout/Logic Components
 
 ## How do I get started
 
-start by installing the "React Multi-Threaded" with `npm install react-multi-threaded`
-and configure your webpack configuration with two app entry points, one to the main thread and one for the web-worker.  
+start by installing the "React Multi-Threaded" along side all of the regular react apps dependencies, you can install  "React Multi-Threaded" with `npm install react-multi-threaded` or `yarn add react-multi-threaded` if you are using yarn.  
+
+the next step is to configure your webpack configuration, we will configure it with two app entry points, one to the main thread and one for the web-worker.  
 `// webpack.config.js example`
 
 ```js
@@ -69,34 +69,36 @@ we also need to create a html index
   </head>
   <body>
     <div id="main" />
+    <!-- main thread entry point -->
     <script src="main.bundle.js"></script>
     <script>
+      // worker entry point
       new Worker("./worker.bundle.js");
     </script>
   </body>
 </html>
 ```
 
-now that we got done with the technical stuff, let's move on to some programing  
-we first need to create a basic react-app with one exception: we need to separate our UI components from our layout components
+now that we got done with the technical stuff, let's move on to some programing!  
+we first need to create a basic react-app but with one exception: we need to separate our UI components from our layout components
 
-let's start with some UI components
+let's start by creating some UI components
 `// src/components/UI/Home.jsx`
 
 ```jsx
 import React from "react";
-import { UIComponent, AsUIComponent } from "react-multi-threaded";
+import { UIComponentProps, AsUIComponent } from "react-multi-threaded";
 
-class Home extends UIComponent {
-  render() {
-    return (
+
+const Home = (props) => {
+  return (
       <div>
-        <h1>Hello - {this.props.username}</h1>
-        {this.props.children}
-        <button onClick={() => this.props.logout()}>logout</button>
+        <h1>Hello - {props.username}</h1>
+        {props.children}
+        <button onClick={() => props.logout()}>logout</button>
       </div>
-    );
-  }
+
+  )
 }
 
 export default AsUIComponent(Home);
@@ -106,9 +108,9 @@ export default AsUIComponent(Home);
 
 ```jsx
 import React from "react";
-import { UIComponent, AsUIComponent } from "react-multi-threaded";
+import { UIComponentProps, AsUIComponent } from "react-multi-threaded";
 
-class Login extends UIComponent {
+class Login extends React.Component {
   state = {
     username: "",
     password: "",
@@ -144,19 +146,19 @@ export default AsUIComponent(Login);
 
 ```jsx
 import React from "react";
-import { UIComponent, AsUIComponent } from "react-multi-threaded";
+import { AsUIComponent, UIComponentProps } from "react-multi-threaded";
 
-class Prompt extends UIComponent {
-  render() {
-    return (
-      <div>
-        <h1>{this.props.message}</h1>
-        {this.props.children}
-        <button onClick={() => this.props.onOk()}>ok</button>
-      </div>
-    );
-  }
+
+const Prompt = (props) => {
+  return (
+    <div>
+      <h1>{props.message}</h1>
+      {props.children}
+      <button onClick={() => props.onOk()}>ok</button>
+    </div>
+  );
 }
+
 export default AsUIComponent(Prompt);
 ```
 
@@ -164,21 +166,21 @@ export default AsUIComponent(Prompt);
 
 ```jsx
 import React from "react";
-import { UIComponent, AsUIComponent } from "react-multi-threaded";
+import { UIComponentProps, AsUIComponent } from "react-multi-threaded";
 
-class Gif extends UIComponent {
-  render() {
-    return (
-      <div>
-        <img src={this.props.url} />
-      </div>
-    );
-  }
+const Gif = (props) => {
+  return (
+    <div>
+      <img src={props.url} />
+    </div>
+  );
+
 }
+
 export default AsUIComponent(Gif);
 ```
 
-now let's move on to some layout components
+now the we are done with the UI components let's move on to some layout components
 `// src/components/Layout/App.jsx`
 
 ```jsx
@@ -224,7 +226,7 @@ const App = () => {
 export default App;
 ```
 
-now that we fisnish creating our App body we need to set app two app entry points, one for the main thread bundle and one for the web-worker bundle  
+now that we finished creating our App body we need to set-up two app entry points for our app, one for the main thread js bundle and one for the web-worker js bundle  
 the main thread index will be called `main.jsx`
 `// src/main.js example`
 
@@ -260,4 +262,4 @@ RenderApp(<App />);
 <b>It is finished, we now have a multi-threaded react app</b>
 ![example screenshot](./assets/demo-screenshot.png)
 
-<p align="center">we can see in the screenshot above that the App component from `App.jsx` is missing in the react dev-tools tree, that is because it is running on a spearate web worker</p>
+<p align="center">we can see in the screenshot above that the App component from `App.jsx` is missing in the react dev-tools tree, that is because it is running it on a separate web worker</p>
