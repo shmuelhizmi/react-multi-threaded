@@ -11,18 +11,18 @@
 
 ## How does it work?
 
-In "React Multi-Threaded" you have two different types of components
+In "React Multi-Threaded" we have two different types of components
 
 - UI Component - UI Components are React components that run on the main thread, they run there since dom interactions must come from the main thread.
-- Layout/Logic Component - Layout/Logic-Components are components that run on the web-worker thread, they are used for data fetching, business logic, and high level layouts.  
+- Layout/Logic Component - Layout/Logic-Components are components that run on the web-worker thread, they are used for data fetching, business logic, and high-level layouts.  
 
 with "React Multi-Threaded" you can build your app from a mix of those two types of components and "React Multi-Threaded" will separate them into 2 threads, one UI thread with your UI Components and one business logic web-worker thread with your Layout/Logic Components
 
 ## How do I get started
 
-start by installing the "React Multi-Threaded" along side all of the regular react apps dependencies, you can install  "React Multi-Threaded" with `npm install react-multi-threaded` or `yarn add react-multi-threaded` if you are using yarn.  
+start by installing the "React Multi-Threaded" along-side all of the regular react apps dependencies, you can install  "React Multi-Threaded" with `npm install react-multi-threaded` or `yarn add react-multi-threaded` if you are using yarn.  
 
-the next step is to configure your webpack configuration, we will configure it with two app entry points, one to the main thread and one for the web-worker.  
+the next step is to configure your Webpack configuration, we will configure it with two app entry points, one to the main thread and one for the web-worker.  
 `// webpack.config.js example`
 
 ```js
@@ -56,7 +56,7 @@ module.exports = {
 };
 ```
 
-we also need to create a html index
+we also need to create an Html index and initialize our web-worker in it.
 `// html index.html example`
 
 ```html
@@ -80,9 +80,10 @@ we also need to create a html index
 ```
 
 now that we got done with the technical stuff, let's move on to some programing!  
-we first need to create a basic react-app but with one exception: we need to separate our UI components from our layout components
+we first need to create a basic react-app although with one simple exception - we need to separate our UI components from our layout components
 
 let's start by creating some UI components
+
 `// src/components/UI/Home.jsx`
 
 ```jsx
@@ -180,7 +181,8 @@ const Gif = (props) => {
 export default AsUIComponent(Gif);
 ```
 
-now the we are done with the UI components let's move on to some layout components
+now that we are done with the UI components let's move on to creating some layout components, those components will define our app logic and layout.  
+
 `// src/components/Layout/App.jsx`
 
 ```jsx
@@ -199,13 +201,12 @@ const App = () => {
       {location === "home" && (
         <Home logout={() => setLocation("login")} username={name}>
           <Gif url="https://upload.wikimedia.org/wikipedia/commons/7/78/GRACE_globe_animation.gif" />
-          <Gif url="https://upload.wikimedia.org/wikipedia/commons/7/78/GRACE_globe_animation.gif" />
         </Home>
       )}
       {location === "login" && (
         <Login
           login={(username, password) => {
-            if (password === "0000") {
+            if (password === "0000") { // only log-in if the pasword is 0000
               setName(username);
               setLocation("home");
             } else {
@@ -226,8 +227,9 @@ const App = () => {
 export default App;
 ```
 
-now that we finished creating our App body we need to set-up two app entry points for our app, one for the main thread js bundle and one for the web-worker js bundle  
-the main thread index will be called `main.jsx`
+congrats we finished creating our entire app UI and layout, we now will need to set-up two app entry points for our app, one for the main thread js bundle and one for the web-worker js bundle.  
+the main thread index will be called `main.jsx`  
+
 `// src/main.js example`
 
 ```js
@@ -247,8 +249,9 @@ render(
 );
 ```
 
-that's should be it for the main thread index, moving on to the the web worker thread index.
-the web worker index will be called `index.jsx` in our example
+that's should be it for the main thread index, let's move on to the web-worker thread index.
+the web worker index will be called `index.jsx` in our example  
+
 `// src/index.jsx example`
 
 ```jsx
