@@ -59,7 +59,7 @@
         "skipLibCheck": true, /* Skip type checking of declaration files. */
         "forceConsistentCasingInFileNames": true, /* Disallow inconsistently-cased references to the same file. */
         "paths": {
-            "react-multi-threaded": [
+            "react-multi-threaded/src": [
                 "../react-multi-threaded"
             ],
             "react-multi-threaded/*": [

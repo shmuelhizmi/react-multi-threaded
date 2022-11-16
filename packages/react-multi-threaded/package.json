@@ -8,7 +8,8 @@
     "private": false,
     "scripts": {
         "prepare": "npm run build",
-        "build": "tsc"
+        "build": "tsc",
+        "watch": "tsc --watch"
     },
     "devDependencies": {
         "@types/uuid": "3.4.3",

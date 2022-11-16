@@ -1,9 +1,7 @@
-import React from "react";
+import React from "react"
 
-import { AsUIComponent, UIComponentProps } from "./UIComponent";
+import { AsUIComponent, UIComponentProps } from "./UIComponent"
 
-const RootReactMultiThreadedComponent = (props: UIComponentProps<{}>) => {
-  return <> {props.children} </>;
-};
+const RootReactMultiThreadedComponent = (props: UIComponentProps<{}>) => <>{props.children}</>
 
-export default AsUIComponent(RootReactMultiThreadedComponent);
+export default AsUIComponent(RootReactMultiThreadedComponent)

@@ -1,10 +1,11 @@
 import React from "react"
 import { render } from "react-dom"
-import { MainThreadClient } from "react-multi-threaded"
-import Components from "./components/UI"
+import { Client } from "react-multi-threaded/src"
+import * as Components from "./components/UI"
+// import { Login } from "./components/UI"
 
 console.log('MainhTreadClient')
 render(
-    <MainThreadClient UIComponents={Components} />,
+    <Client UIComponents={Object.values(Components)} />,
     document.getElementById("main")
 )

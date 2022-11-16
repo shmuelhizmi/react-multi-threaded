@@ -1,11 +1,16 @@
+/** @jsxImportSource @emotion/react */
+
+import { css } from '@emotion/react'
+
 import React, { useState } from "react"
-import Gif from "../UI/Gif"
-import Home from "../UI/Home"
-import Login from "../UI/Login"
-import Prompt from "../UI/Prompt"
+import { Gif } from "../UI/Gif"
+import { Home } from "../UI/Home"
+import { Login } from "../UI/Login"
+import { Prompt } from "../UI/Prompt"
 
 console.log('App')
-const App = () => {
+
+export const App = (props: { className?: string }) => {
     const [location, setLocation] = useState<"home" | "error" | "login">("login")
     const [name, setName] = useState("")
     return (
@@ -36,5 +41,3 @@ const App = () => {
         </>
     )
 }
-
-export default App

@@ -1,13 +1,8 @@
-import React from "react";
-import { UIComponentProps, AsUIComponent } from "react-multi-threaded";
+import React from "react"
+import { UIComponentProps, AsUIComponent } from "react-multi-threaded/src"
 
-const Gif = (props: UIComponentProps<{ url: string }>) => {
-  return (
-    <div>
-      <img src={props.url} />
-    </div>
-  );
+export const Gif = AsUIComponent((props: UIComponentProps<{ url: string }>) => <div>
+    <img src={props.url} />
+</div>)
 
-}
-
-export default AsUIComponent(Gif);
+// export default AsUIComponent(Gif)

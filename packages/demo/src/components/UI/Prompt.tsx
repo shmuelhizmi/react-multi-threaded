@@ -1,14 +1,11 @@
 import React from "react"
-import { AsUIComponent, UIComponentProps } from "react-multi-threaded"
+import { AsUIComponent, UIComponentProps } from "react-multi-threaded/src"
 
 
-const Prompt = (props: UIComponentProps<{ message: string; onOk: () => void }>) => {
-    return <div>
-        <h1>{props.message}</h1>
-        {props.children}
-        <button onClick={() => props.onOk()}>ok</button>
-    </div>
+const prompt = (props: UIComponentProps<{ message: string; onOk: () => void }>) => <div>
+    <h1>{props.message}</h1>
+    {props.children}
+    <button onClick={() => props.onOk()}>ok</button>
+</div>
 
-}
-
-export default AsUIComponent(Prompt)
+export const Prompt = AsUIComponent(prompt)

@@ -4,7 +4,7 @@ module.exports = {
     mode: "none",
     entry: {
         main: path.join(__dirname, "src", "main.tsx"),
-        worker: path.join(__dirname, "src", "index.tsx"),
+        worker: path.join(__dirname, "src", "worker.tsx"),
     },
     target: "web",
     mode: "development",
@@ -12,7 +12,7 @@ module.exports = {
         extensions: [".ts", ".tsx", ".js"],
         alias: {
             react: path.resolve("./node_modules/react"),
-            "react-multi-threaded": path.resolve(__dirname, "../react-multi-threaded"),
+            "react-multi-threaded/src": path.resolve(__dirname, "../react-multi-threaded"),
         },
     },
     module: {
