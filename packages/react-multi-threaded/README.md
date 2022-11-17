@@ -290,12 +290,13 @@ new Worker("./worker.bundle.js")
 const container = document.getElementById("main")
 const sub = document.getElementById("sub")
 const root = createRoot(container)
-root.render(<Client id="mainClient" Components={[...Object.values(Components)]} channel="WorkerApp" />,)
+root.render(<Client Components={[...Object.values(Components)]} channel="WorkerApp" />,)
 
 new Worker("./footer.bundle.js")
 
 const bdy = createRoot(sub)
-bdy.render(<Client id="subClient" Components={[...Object.values(Components)]} channel="Footer" />,)
+bdy.render(<Client Components={[...Object.values(Components)]} channel="Footer" />,)
+
 ```
 
 that's should be it for the main thread index, let's move on to the web-worker thread index.
@@ -349,6 +350,14 @@ and
 yarn start
 ```
 
+## Elements creation checks
+![](img/element%20worker.png)  
+
+![](img/element%20worker2.png)  
+
+## React in worker (React.CreateElement)
+
+![](img/react.createelement.png)  
 
 ## Others react + worker  + DOM library
 

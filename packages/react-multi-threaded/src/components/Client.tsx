@@ -27,8 +27,7 @@ const stringifyWithoutCircular = (json: any) => {
     return JSON.stringify(json, getCircularReplacer())
 }
 
-console.log('Client')
-export const Client = (props: { id?: string, /* transport?: AppTransport; */channel: string, Components: AnyComponent<any>[] }) => {
+export const Client = (props: { /* transport?: AppTransport; */channel: string, Components: AnyComponent<any>[] }) => {
     const [state, setState] = useState<ClientState>({ runningViews: [], })
     // const transport = useMemo(() => props.transport || createTransport(), [])
     const transport = useMemo(() => createTransport(props.channel), [])
@@ -36,7 +35,6 @@ export const Client = (props: { id?: string, /* transport?: AppTransport; */chan
 
     const UIComponents = useMemo(() => [...props.Components, RootReactMultiThreadedComponent], [])
 
-    console.log("Client", props.id)
     useEffect(() => {
         transport.on("update_views_tree", ({ views }: { views: ShareableViewData[] }) => setState({ runningViews: views }))
 

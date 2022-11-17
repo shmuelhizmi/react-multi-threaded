@@ -38,11 +38,9 @@ interface UIComponentContainerProps<C, P extends { children?: ReactNode | ReactN
     props: P
 }
 
-console.log('MainThreadContainer')
-const MainThreadContainer = <Props extends { children?: ReactNode | ReactNode[] }, Component extends FunctionComponent<Props> | ClassComponent<Props>>(props: UIComponentContainerProps<Component, Props> & { children?: ReactNode | ReactNode[] }) => { //<Props extends Record<string, any>, Component extends FunctionComponent<Props> | ClassComponent<Props>>
-    // extends React.Component<UIComponentContainerProps<Component, Props> & { children?: ReactNode | ReactNode[] }> {
+const MainThreadContainer = <Props extends { children?: ReactNode | ReactNode[] }, Component extends FunctionComponent<Props> | ClassComponent<Props>>
+    (props: UIComponentContainerProps<Component, Props> & { children?: ReactNode | ReactNode[] }) => {
 
-    // static contextType = AppTypeContext;
     const context = useContext(ThreadContext)
     const uid = useMemo(() => v4(), [])
     const worker = useContext(WorkerAppContext)
