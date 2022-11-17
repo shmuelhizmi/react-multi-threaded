@@ -203,6 +203,42 @@ export const Gif = AsUIComponent((props: WorkerProps<{ url: string }>) => <div>
 // export default AsUIComponent(Gif)
 ```
 
+## src/components/UI/Footer.tsx
+
+```tsx
+/** @jsxImportSource @emotion/react */
+
+import { css } from '@emotion/react'
+
+import React, { useEffect, useState } from "react"
+import { WorkerProps, AsUIComponent } from "react-multi-threaded/src"
+
+console.log('Footer')
+const footer = (props: WorkerProps<{ onTimer?: (value: number) => void }>) => {
+    const [count, setCount] = useState(0)
+    const isWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope
+
+    useEffect(() => {
+        setTimeout(() => {
+            const isWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope
+            console.log("isWorker: ", isWorker, count + 1) //run in main thread
+
+            setCount(count + 1)
+
+            props?.onTimer(count + 1)
+        }, 1000)
+    }, [count])
+
+    return <div css={css`font-weight:bold; color:blue;`}>
+        Footer ({count})
+
+        <div>isWorker: {isWorker + ''}</div>
+        {props.children}
+    </div>
+}
+export const Footer = AsUIComponent(footer)
+```
+
 now that we are done with the UI components let's move on to creating some layout components, those components will define our app logic and layout.  
 
 ## src/components/Layout/WorkerApp.tsx
@@ -300,7 +336,7 @@ bdy.render(<Client Components={[...Object.values(Components)]} channel="Footer" 
 that's should be it for the main thread index, let's move on to the web-worker thread index.
 the web worker index will be called `worker.tsx` in our example  
 
-## src/index.tsx
+## src/app.worker.tsx
 
 ```tsx
 import React from "react"
@@ -312,7 +348,7 @@ WorkerRender(<WorkerApp />, 'WorkerApp')
 
 and 2nd worker, the footer, `footer.worker.tsx` in our example  
 
-## src/index.tsx
+## src/footer.worker.tsx
 
 ```tsx
 import React from "react"
