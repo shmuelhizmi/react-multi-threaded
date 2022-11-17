@@ -13,14 +13,14 @@
 
 ## Keywords
 
-- webpack
-- typescript
+- [webpack](https://webpack.js.org/)
+- [typescript](https://www.typescriptlang.org/)
 - worker
-- @emotion
+- [@emotion](https://emotion.sh/)
 - styled
 - threads
-- hooks
-- react
+- [hooks](https://reactjs.org/docs/hooks-intro.html)
+- [react](https://reactjs.org/)
 
 ## How does it work?
 

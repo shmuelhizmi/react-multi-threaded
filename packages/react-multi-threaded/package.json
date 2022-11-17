@@ -1,6 +1,6 @@
 {
     "name": "react-hooks-multi-threaded",
-    "version": "0.1.4",
+    "version": "0.1.5",
     "description": "seperate your react-app into web-workers",
     "main": "lib/index.js",
     "author": "wongchichong",
