@@ -207,7 +207,7 @@ export const Gif = AsUIComponent((props: WorkerProps<{ url: string }>) => <div>
 
 now that we are done with the UI components let's move on to creating some layout components, those components will define our app logic and layout.  
 
-`// src/components/Layout/WorkerApp.tsx`
+## src/components/Layout/WorkerApp.tsx
 
 ```tsx
 /** @jsxImportSource @emotion/react */

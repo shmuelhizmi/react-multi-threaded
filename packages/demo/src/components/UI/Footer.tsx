@@ -12,9 +12,13 @@ const footer = (props: WorkerProps<{ onTimer?: (value: number) => void }>) => {
 
     useEffect(() => {
         setTimeout(() => {
+            const isWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope
+            console.log("isWorker: ", isWorker, count + 1) //run in main thread
+
             setCount(count + 1)
+
             props?.onTimer(count + 1)
-        }, 500)
+        }, 1000)
     }, [count])
 
     return <div css={css`font-weight:bold; color:blue;`}>
