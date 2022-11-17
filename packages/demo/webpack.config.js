@@ -4,8 +4,6 @@ module.exports = {
     mode: "none",
     entry: {
         index: path.join(__dirname, "src", "index.tsx"),
-        worker: path.join(__dirname, "src", "worker.tsx"),
-        footer: path.join(__dirname, "src", "footer.worker.tsx"),
     },
     target: "web",
     mode: "development",

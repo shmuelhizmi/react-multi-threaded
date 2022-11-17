@@ -13,14 +13,14 @@
 
 ## Keywords
 
-- [webpack](https://webpack.js.org/)
-- [typescript](https://www.typescriptlang.org/)
-- worker
+- [Webpack 5](https://webpack.js.org/)
+- [Typescript](https://www.typescriptlang.org/)
+- Worker
 - [@emotion](https://emotion.sh/)
 - styled
 - threads
-- [hooks](https://reactjs.org/docs/hooks-intro.html)
-- [react](https://reactjs.org/)
+- [Hooks](https://reactjs.org/docs/hooks-intro.html)
+- [React 18](https://reactjs.org/)
 
 ## How does it work?
 
@@ -46,8 +46,6 @@ module.exports = {
     mode: "none",
     entry: {
         index: path.join(__dirname, "src", "index.tsx"),
-        worker: path.join(__dirname, "src", "worker.tsx"),  //1st worker
-        footer: path.join(__dirname, "src", "footer.worker.tsx"),  //2nd worker
     },
     target: "web",
     mode: "development",
@@ -285,14 +283,14 @@ import { createRoot } from 'react-dom/client'
 import { Client } from "react-multi-threaded/src"
 import * as Components from "./components/UI"
 
-new Worker("./worker.bundle.js")
+new Worker(new URL('./app.worker', import.meta.url))
 
 const container = document.getElementById("main")
 const sub = document.getElementById("sub")
 const root = createRoot(container)
 root.render(<Client Components={[...Object.values(Components)]} channel="WorkerApp" />,)
 
-new Worker("./footer.bundle.js")
+new Worker(new URL('./footer.worker', import.meta.url))
 
 const bdy = createRoot(sub)
 bdy.render(<Client Components={[...Object.values(Components)]} channel="Footer" />,)
