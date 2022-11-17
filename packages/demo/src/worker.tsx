@@ -1,5 +1,5 @@
 import React from "react"
-import { WorkerRender } from "react-multi-threaded/src"
-import { App } from "./components/Layout/App"
+import { WorkerRender } from "react-multi-threaded/src/WorkerRender"
+import { WorkerApp } from "./components/Layout/WorkerApp"
 
-WorkerRender(<App />)
+WorkerRender(<WorkerApp />, 'WorkerApp')

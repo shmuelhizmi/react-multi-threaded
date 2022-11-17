@@ -1,10 +1,11 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react"
+import React, { useCallback, useContext, useEffect, useMemo, useState } from "react"
 import { v4 } from "uuid"
-import { ShareableViewData } from "../WorkerApp"
+import { ShareableViewData } from "../WorkerHost"
 import { AppTransport } from "../types"
 import { createTransport } from "../Transport"
 import { AnyComponent } from "./UIComponent"
-import RootReactMultiThreadedComponent from "./RootComponent"
+import { RootReactMultiThreadedComponent } from "./RootComponent"
+import { ThreadContext } from "../Contexts"
 
 interface ClientState { runningViews: ShareableViewData[] }
 
@@ -26,12 +27,16 @@ const stringifyWithoutCircular = (json: any) => {
     return JSON.stringify(json, getCircularReplacer())
 }
 
-export const Client = (props: { transport?: AppTransport; UIComponents: AnyComponent<any>[] }) => {
+console.log('Client')
+export const Client = (props: { id?: string, /* transport?: AppTransport; */channel: string, Components: AnyComponent<any>[] }) => {
     const [state, setState] = useState<ClientState>({ runningViews: [], })
-    const transport = useMemo(() => props.transport || createTransport(), [])
+    // const transport = useMemo(() => props.transport || createTransport(), [])
+    const transport = useMemo(() => createTransport(props.channel), [])
+    // const context = useContext(ThreadContext) //main
 
-    const UIComponents = useMemo(() => [...props.UIComponents, RootReactMultiThreadedComponent], [])
+    const UIComponents = useMemo(() => [...props.Components, RootReactMultiThreadedComponent], [])
 
+    console.log("Client", props.id)
     useEffect(() => {
         transport.on("update_views_tree", ({ views }: { views: ShareableViewData[] }) => setState({ runningViews: views }))
 

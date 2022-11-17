@@ -1,10 +1,10 @@
 import React from "react"
 import { v4 } from "uuid"
-import { WorkerAppContext, AppTypeContext } from "./Contexts"
+import { WorkerAppContext, ThreadContext } from "./Contexts"
 import { AppTransport } from "./types"
 import { Render } from "@react-fullstack/render"
 import { createTransport } from "./Transport"
-import RootReactMultiThreadedComponent from "./components/RootComponent"
+import { RootReactMultiThreadedComponent } from "./components/RootComponent"
 
 type ViewDataBase = {
     uid: string
@@ -17,7 +17,7 @@ type ViewData = ViewDataBase & { props: Record<string, any> }
 
 export type ShareableViewData = ViewDataBase & { props: Array<{ name: string } & (| { type: "data", data: any, } | { type: "event", uid: string, })> }
 
-export class WorkerApp {
+export class WorkerHost {
     private appTree: JSX.Element
     private server?: AppTransport
     private clients: AppTransport[] = [];
@@ -38,11 +38,11 @@ export class WorkerApp {
         this.server = server
         this.reactTreeController = Render(
             <WorkerAppContext.Provider value={this}>
-                <AppTypeContext.Provider value={"worker"}>
+                <ThreadContext.Provider value={"worker"}>
                     <RootReactMultiThreadedComponent>
                         {this.appTree}
                     </RootReactMultiThreadedComponent>
-                </AppTypeContext.Provider>
+                </ThreadContext.Provider>
             </WorkerAppContext.Provider>
         )
         this.server.emit("on_worker_start")
@@ -188,15 +188,3 @@ export class WorkerApp {
         }
     }
 }
-export const WorkerRender = (appTree: JSX.Element, transport?: AppTransport) => {
-    const appTransport = transport || createTransport()
-    const app = new WorkerApp(appTree)
-    app.addClient(appTransport)
-    app.startServer(appTransport)
-
-    return {
-        pause: app.pauseApp,
-        continue: app.resumeApp,
-    }
-}
-

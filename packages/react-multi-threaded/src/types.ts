@@ -1,11 +1,9 @@
-import { ShareableViewData } from "./WorkerApp"
+import { ShareableViewData } from "./WorkerHost"
 
 export interface Transport<Events extends object> {
     emit: <T extends keyof Events>(event: T, message?: Events[T]) => void
     on: <T extends keyof Events>(event: T, handler: (data: Events[T]) => void) => void
 }
-
-export const tranportBroadcastName = "react-multi-threaded-transport"
 
 interface AppEvents {
     update_views_tree: { views: ShareableViewData[] }

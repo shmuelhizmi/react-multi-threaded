@@ -1,8 +1,8 @@
 import React from "react"
-import { UIComponentProps, AsUIComponent } from "react-multi-threaded/src"
+//use - from "react-multi-threaded" if npm-ed
+import { WorkerProps, AsUIComponent } from "react-multi-threaded/src"
 
-
-const home = (props: UIComponentProps<{ username: string; logout: () => void }>) => <div>
+const home = (props: WorkerProps<{ username: string; logout: () => void }>) => <div>
     <h1>Hello - {props.username}</h1>
     {props.children}
     <button onClick={() => props.logout()}>logout</button>

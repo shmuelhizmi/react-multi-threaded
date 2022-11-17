@@ -1,5 +1,4 @@
-console.log('createFunction')
-const createFunction = <F extends Function>(name: string, body: F): F => {
+export const createFunction = <F extends Function>(name: string, body: F): F => {
     try {
         window
     } catch {
@@ -19,4 +18,3 @@ const createFunction = <F extends Function>(name: string, body: F): F => {
     return func
 }
 
-export { createFunction }

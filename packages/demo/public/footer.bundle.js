@@ -546,17 +546,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/components/Layout/WorkerApp.tsx":
-/*!*********************************************!*\
-  !*** ./src/components/Layout/WorkerApp.tsx ***!
-  \*********************************************/
-/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
-
-"use strict";
-eval("\r\nvar __assign = (this && this.__assign) || function () {\r\n    __assign = Object.assign || function(t) {\r\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\r\n            s = arguments[i];\r\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\r\n                t[p] = s[p];\r\n        }\r\n        return t;\r\n    };\r\n    return __assign.apply(this, arguments);\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.WorkerApp = void 0;\r\nvar jsx_runtime_1 = __webpack_require__(/*! @emotion/react/jsx-runtime */ \"./node_modules/@emotion/react/jsx-runtime/dist/emotion-react-jsx-runtime.browser.esm.js\");\r\nvar react_1 = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\r\nvar src_1 = __webpack_require__(/*! react-multi-threaded/src */ \"../react-multi-threaded/src/index.ts\");\r\nvar About_1 = __webpack_require__(/*! ../UI/About */ \"./src/components/UI/About.tsx\");\r\nvar Gif_1 = __webpack_require__(/*! ../UI/Gif */ \"./src/components/UI/Gif.tsx\");\r\nvar Home_1 = __webpack_require__(/*! ../UI/Home */ \"./src/components/UI/Home.tsx\");\r\nvar Login_1 = __webpack_require__(/*! ../UI/Login */ \"./src/components/UI/Login.tsx\");\r\nvar Prompt_1 = __webpack_require__(/*! ../UI/Prompt */ \"./src/components/UI/Prompt.tsx\");\r\nvar WorkerApp = function (props) {\r\n    var context = (0, react_1.useContext)(src_1.ThreadContext);\r\n    var _a = (0, react_1.useState)(\"login\"), location = _a[0], setLocation = _a[1];\r\n    var _b = (0, react_1.useState)(\"\"), name = _b[0], setName = _b[1];\r\n    return (0, jsx_runtime_1.jsxs)(jsx_runtime_1.Fragment, { children: [location === \"home\" && (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: (0, jsx_runtime_1.jsxs)(Home_1.Home, __assign({ logout: function () { return setLocation(\"login\"); }, username: name }, { children: [(0, jsx_runtime_1.jsx)(Gif_1.Gif, { url: \"https://upload.wikimedia.org/wikipedia/commons/7/78/GRACE_globe_animation.gif\" }), (0, jsx_runtime_1.jsx)(Gif_1.Gif, { url: \"https://upload.wikimedia.org/wikipedia/commons/7/78/GRACE_globe_animation.gif\" })] })) }), location === \"login\" && (0, jsx_runtime_1.jsx)(jsx_runtime_1.Fragment, { children: (0, jsx_runtime_1.jsx)(Login_1.Login, __assign({ login: function (username, password) {\r\n                        console.log(\"Login\", context);\r\n                        if (password === \"0000\") {\r\n                            setName(username);\r\n                            setLocation(\"home\");\r\n                        }\r\n                        else {\r\n                            setLocation(\"error\");\r\n                        }\r\n                    } }, { children: (0, jsx_runtime_1.jsx)(About_1.About, {}) })) }), location === \"error\" && ((0, jsx_runtime_1.jsxs)(Prompt_1.Prompt, __assign({ message: \"wrong password\", onOk: function () {\r\n                    console.log(\"onOK\", context); //worker\r\n                    setLocation(\"login\");\r\n                } }, { children: [(0, jsx_runtime_1.jsx)(About_1.About, {}), (0, jsx_runtime_1.jsx)(Gif_1.Gif, { url: \"https://upload.wikimedia.org/wikipedia/commons/7/78/GRACE_globe_animation.gif\" })] })))] });\r\n};\r\nexports.WorkerApp = WorkerApp;\r\n\n\n//# sourceURL=webpack://react-multi-threaded-demo/./src/components/Layout/WorkerApp.tsx?");
-
-/***/ }),
-
 /***/ "./src/components/UI/About.tsx":
 /*!*************************************!*\
   !*** ./src/components/UI/About.tsx ***!
@@ -565,6 +554,17 @@ eval("\r\nvar __assign = (this && this.__assign) || function () {\r\n    __assig
 
 "use strict";
 eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.About = void 0;\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\r\nvar src_1 = __webpack_require__(/*! react-multi-threaded/src */ \"../react-multi-threaded/src/index.ts\");\r\nvar about = function (props) { return react_1.default.createElement(\"div\", null,\r\n    react_1.default.createElement(\"h1\", null, \"About\")); };\r\nexports.About = (0, src_1.AsUIComponent)(about);\r\n\n\n//# sourceURL=webpack://react-multi-threaded-demo/./src/components/UI/About.tsx?");
+
+/***/ }),
+
+/***/ "./src/components/UI/Footer.tsx":
+/*!**************************************!*\
+  !*** ./src/components/UI/Footer.tsx ***!
+  \**************************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __makeTemplateObject = (this && this.__makeTemplateObject) || function (cooked, raw) {\r\n    if (Object.defineProperty) { Object.defineProperty(cooked, \"raw\", { value: raw }); } else { cooked.raw = raw; }\r\n    return cooked;\r\n};\r\nvar __assign = (this && this.__assign) || function () {\r\n    __assign = Object.assign || function(t) {\r\n        for (var s, i = 1, n = arguments.length; i < n; i++) {\r\n            s = arguments[i];\r\n            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))\r\n                t[p] = s[p];\r\n        }\r\n        return t;\r\n    };\r\n    return __assign.apply(this, arguments);\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nexports.Footer = void 0;\r\nvar jsx_runtime_1 = __webpack_require__(/*! @emotion/react/jsx-runtime */ \"./node_modules/@emotion/react/jsx-runtime/dist/emotion-react-jsx-runtime.browser.esm.js\");\r\n/** @jsxImportSource @emotion/react */\r\nvar react_1 = __webpack_require__(/*! @emotion/react */ \"./node_modules/@emotion/react/dist/emotion-react.browser.esm.js\");\r\nvar src_1 = __webpack_require__(/*! react-multi-threaded/src */ \"../react-multi-threaded/src/index.ts\");\r\nvar footer = function (props) { return (0, jsx_runtime_1.jsx)(\"div\", __assign({ css: (0, react_1.css)(templateObject_1 || (templateObject_1 = __makeTemplateObject([\"font-weight:bold; color:blue;\"], [\"font-weight:bold; color:blue;\"]))) }, { children: \"Footer\" })); };\r\nexports.Footer = (0, src_1.AsUIComponent)(footer);\r\nvar templateObject_1;\r\n\n\n//# sourceURL=webpack://react-multi-threaded-demo/./src/components/UI/Footer.tsx?");
 
 /***/ }),
 
@@ -612,14 +612,25 @@ eval("\r\nvar __createBinding = (this && this.__createBinding) || (Object.create
 
 /***/ }),
 
-/***/ "./src/worker.tsx":
-/*!************************!*\
-  !*** ./src/worker.tsx ***!
-  \************************/
+/***/ "./src/components/UI/index.tsx":
+/*!*************************************!*\
+  !*** ./src/components/UI/index.tsx ***!
+  \*************************************/
 /***/ (function(__unused_webpack_module, exports, __webpack_require__) {
 
 "use strict";
-eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\r\nvar WorkerRender_1 = __webpack_require__(/*! react-multi-threaded/src/WorkerRender */ \"../react-multi-threaded/src/WorkerRender.tsx\");\r\nvar WorkerApp_1 = __webpack_require__(/*! ./components/Layout/WorkerApp */ \"./src/components/Layout/WorkerApp.tsx\");\r\n(0, WorkerRender_1.WorkerRender)(react_1.default.createElement(WorkerApp_1.WorkerApp, null), 'WorkerApp');\r\n\n\n//# sourceURL=webpack://react-multi-threaded-demo/./src/worker.tsx?");
+eval("\r\nvar __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    var desc = Object.getOwnPropertyDescriptor(m, k);\r\n    if (!desc || (\"get\" in desc ? !m.__esModule : desc.writable || desc.configurable)) {\r\n      desc = { enumerable: true, get: function() { return m[k]; } };\r\n    }\r\n    Object.defineProperty(o, k2, desc);\r\n}) : (function(o, m, k, k2) {\r\n    if (k2 === undefined) k2 = k;\r\n    o[k2] = m[k];\r\n}));\r\nvar __exportStar = (this && this.__exportStar) || function(m, exports) {\r\n    for (var p in m) if (p !== \"default\" && !Object.prototype.hasOwnProperty.call(exports, p)) __createBinding(exports, m, p);\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\n__exportStar(__webpack_require__(/*! ./Prompt */ \"./src/components/UI/Prompt.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./Login */ \"./src/components/UI/Login.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./Gif */ \"./src/components/UI/Gif.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./Home */ \"./src/components/UI/Home.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./About */ \"./src/components/UI/About.tsx\"), exports);\r\n__exportStar(__webpack_require__(/*! ./Footer */ \"./src/components/UI/Footer.tsx\"), exports);\r\n\n\n//# sourceURL=webpack://react-multi-threaded-demo/./src/components/UI/index.tsx?");
+
+/***/ }),
+
+/***/ "./src/footer.worker.tsx":
+/*!*******************************!*\
+  !*** ./src/footer.worker.tsx ***!
+  \*******************************/
+/***/ (function(__unused_webpack_module, exports, __webpack_require__) {
+
+"use strict";
+eval("\r\nvar __importDefault = (this && this.__importDefault) || function (mod) {\r\n    return (mod && mod.__esModule) ? mod : { \"default\": mod };\r\n};\r\nObject.defineProperty(exports, \"__esModule\", ({ value: true }));\r\nvar react_1 = __importDefault(__webpack_require__(/*! react */ \"./node_modules/react/index.js\"));\r\nvar WorkerRender_1 = __webpack_require__(/*! react-multi-threaded/src/WorkerRender */ \"../react-multi-threaded/src/WorkerRender.tsx\");\r\nvar UI_1 = __webpack_require__(/*! ./components/UI */ \"./src/components/UI/index.tsx\");\r\n(0, WorkerRender_1.WorkerRender)(react_1.default.createElement(UI_1.Footer, null), 'Footer');\r\n\n\n//# sourceURL=webpack://react-multi-threaded-demo/./src/footer.worker.tsx?");
 
 /***/ }),
 
@@ -906,7 +917,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module is referenced by other modules so it can't be inlined
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/worker.tsx");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/footer.worker.tsx");
 /******/ 	
 /******/ })()
 ;

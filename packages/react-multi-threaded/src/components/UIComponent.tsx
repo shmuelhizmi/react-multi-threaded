@@ -1,6 +1,6 @@
 import React, { ReactNode, useContext, useEffect, useMemo, useState } from "react"
 import { v4 } from "uuid"
-import { AppTypeContext, WorkerAppContext } from "../Contexts"
+import { ThreadContext, WorkerAppContext } from "../Contexts"
 import { createFunction } from '../utils/createFunction'
 
 const ViewParentContext = React.createContext<{ uid: string; childIndex: number } | undefined>(undefined)
@@ -11,65 +11,49 @@ type MapResultToPromise<T> = T extends (...args: infer U) => infer R
     : (...args: U) => Promise<R>
     : T
 
-type ParseProps<Props extends Record<string, any>> = {
-    [Key in keyof Props]: MapResultToPromise<Props[Key]>
-}
+type ToPromiseProps<Props extends Record<string, any>> = { [Key in keyof Props]: MapResultToPromise<Props[Key]> }
 
-type UnParseProps<Props extends ParseProps<any>> = Props extends ParseProps<
-    infer OriginalProps
->
-    ? OriginalProps
-    : never
+export type ThreadProps<Props extends ToPromiseProps<any>> = Props extends ToPromiseProps<infer OriginalProps> ? OriginalProps : never
 
-type UIComponentProps<Props extends Record<string, any>> = ParseProps<
-    React.PropsWithChildren<Props>
->
+export type WorkerProps<Props extends Record<string, any>> = ToPromiseProps<React.PropsWithChildren<Props>>
 
 type FunctionComponent<P> = (props: P) => React.ReactElement
 
 type ClassComponent<P> = new (props: P) => React.Component<P, any>
 
-type AnyComponent<P> = FunctionComponent<P> | ClassComponent<P>
+export type AnyComponent<P> = FunctionComponent<P> | ClassComponent<P>
 
-type ExtractProps<TComponentOrTProps> =
-    TComponentOrTProps extends AnyComponent<infer TProps>
-    ? TProps
-    : TComponentOrTProps
+type ExtractProps<TComponentOrTProps> = TComponentOrTProps extends AnyComponent<infer TProps> ? TProps : TComponentOrTProps
 
-const AsUIComponent = <Component extends FunctionComponent<any> | ClassComponent<any>>(component: Component) =>
-    createFunction(component.name, (props: UnParseProps<ExtractProps<Component>>) =>
-        <UIComponentContainer<ExtractProps<Component>, Component>
+export const AsUIComponent = <Component extends FunctionComponent<any> | ClassComponent<any>>(component: Component) =>
+    createFunction(component.name, (props: ThreadProps<ExtractProps<Component>>) =>
+        <MainThreadContainer<ExtractProps<Component>, Component>
             component={component}
             props={props as ExtractProps<Component>}
         />
     )
-
 
 interface UIComponentContainerProps<C, P extends { children?: ReactNode | ReactNode[] }> {
     component: C
     props: P
 }
 
-
-const UIComponentContainer = <Props extends { children?: ReactNode | ReactNode[] }, Component extends FunctionComponent<Props> | ClassComponent<Props>>(props: UIComponentContainerProps<Component, Props> & { children?: ReactNode | ReactNode[] }) => { //<Props extends Record<string, any>, Component extends FunctionComponent<Props> | ClassComponent<Props>>
+console.log('MainThreadContainer')
+const MainThreadContainer = <Props extends { children?: ReactNode | ReactNode[] }, Component extends FunctionComponent<Props> | ClassComponent<Props>>(props: UIComponentContainerProps<Component, Props> & { children?: ReactNode | ReactNode[] }) => { //<Props extends Record<string, any>, Component extends FunctionComponent<Props> | ClassComponent<Props>>
     // extends React.Component<UIComponentContainerProps<Component, Props> & { children?: ReactNode | ReactNode[] }> {
 
     // static contextType = AppTypeContext;
-    const context = useContext(AppTypeContext)
+    const context = useContext(ThreadContext)
     const uid = useMemo(() => v4(), [])
     const worker = useContext(WorkerAppContext)
     const parent = useContext(ViewParentContext)
 
-    if (worker) {
+    if (worker)
         worker.deleteRunningView(uid)
-    }
 
-    useEffect(() => {
-        return () => {
-            if (worker) {
-                worker.deleteRunningView(uid)
-            }
-        }
+    useEffect(() => () => {
+        if (worker)
+            worker.deleteRunningView(uid)
     }, [])
 
     const workerRender = () => {
@@ -104,4 +88,3 @@ const UIComponentContainer = <Props extends { children?: ReactNode | ReactNode[]
     return context === "worker" ? workerRender() : React.createElement(Component, props.props)
 }
 
-export { AsUIComponent, UIComponentProps, AnyComponent }
