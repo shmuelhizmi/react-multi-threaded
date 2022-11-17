@@ -1,5 +1,7 @@
 <h1 align="center">
-  React-hooks Multi-Threaded (multipe channels, hooks implementation)
+  React-hooks Multi-Threaded
+
+  (multipe channels, hooks implementation)
 </h1>
 <p align="center">
   create FAST multi-threaded React Apps - one App multi-threads (multipe channel)
@@ -23,7 +25,8 @@ with "React-hooks Multi-Threaded" you can build your app from a mix of those two
 start by installing the "React-hooks Multi-Threaded" along-side all of the regular react apps dependencies, you can install  "React-hooks Multi-Threaded" with `npm install react-hooks-multi-threaded` or `yarn add react-hooks-multi-threaded` if you are using yarn.  
 
 the next step is to configure your Webpack configuration, we will configure it with two app entry points, one to the main thread and one for the web-worker.  
-`// webpack.config.js example`
+
+## webpack.config.js
 
 ```js
 const path = require("path")
@@ -63,12 +66,12 @@ module.exports = {
         filename: "[name].bundle.js",
         path: path.resolve(__dirname, "public"),
     },
-
 }
 ```
 
 we also need to create an Html index and initialize our web-worker in it.
-`// html index.html example`
+
+## index.html
 
 ```html
 <!DOCTYPE html>
@@ -97,7 +100,7 @@ let's start by creating some UI components
 
 Some pages are created/tested with @emotion styling too.
 
-`// src/components/UI/Home.tsx`
+## src/components/UI/Home.tsx
 
 ```tsx
 import React from "react"
@@ -113,7 +116,7 @@ const home = (props: WorkerProps<{ username: string; logout: () => void }>) => <
 export const Home = AsUIComponent(home)
 ```
 
-`// src/components/UI/Login.tsx`
+## src/components/UI/Login.tsx
 
 ```tsx
 /** @jsxImportSource @emotion/react */
@@ -157,7 +160,7 @@ export const Login = AsUIComponent(login)
 
 ```
 
-`// src/components/UI/Prompt.tsx`
+## src/components/UI/Prompt.tsx
 
 ```tsx
 import React, { useContext } from "react"
@@ -178,7 +181,7 @@ const prompt = (props: WorkerProps<{ message: string; onOk: () => void }>) => {
 export const Prompt = AsUIComponent(prompt)
 ```
 
-`// src/components/UI/Gif.tsx`
+## src/components/UI/Gif.tsx
 
 ```tsx
 import React from "react"
@@ -262,7 +265,7 @@ export const WorkerApp = (props: { className?: string }) => {
 congrats we finished creating our entire app UI and layout, we now will need to set-up two app entry points for our app, one for the main thread js bundle and one for the web-worker js bundle.  
 the main thread index will be called `index.tsx`  
 
-`// src/index.ts example`
+## src/index.ts
 
 ```ts
 import React from "react"
@@ -287,7 +290,7 @@ bdy.render(<Client id="subClient" Components={[...Object.values(Components)]} ch
 that's should be it for the main thread index, let's move on to the web-worker thread index.
 the web worker index will be called `worker.tsx` in our example  
 
-`// src/index.tsx example`
+## src/index.tsx
 
 ```tsx
 import React from "react"
@@ -299,7 +302,7 @@ WorkerRender(<WorkerApp />, 'WorkerApp')
 
 and 2nd worker, the footer, `footer.worker.tsx` in our example  
 
-`// src/index.tsx example`
+## src/index.tsx
 
 ```tsx
 import React from "react"
@@ -334,3 +337,14 @@ and
 ```bash
 yarn start
 ```
+
+
+## Others react + worker  + DOM library
+
+[react-worker-dom](https://github.com/web-perf/react-worker-dom) too old not compatible to latest React.
+
+[react-web-worker](https://github.com/Shopify/quilt/tree/main/packages/react-web-worker) no DOM
+
+[react-worker-components](https://github.com/dai-shi/react-worker-components) with DOM but not compatible with styling engine
+
+[react-worker-render](https://github.com/yiminghe/react-worker-render) using fiber a bit complicated.
