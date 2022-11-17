@@ -11,6 +11,17 @@
 
 "React-hooks Multi-Threaded" is a (type/java)script framework that lets you transform your existing/new React-App from a single-threaded Web-App into a multi-threaded faster Web-App.
 
+## Keywords
+
+- webpack
+- typescript
+- worker
+- @emotion
+- styled
+- threads
+- hooks
+- react
+
 ## How does it work?
 
 In "React-hooks Multi-Threaded" we have two different types of components

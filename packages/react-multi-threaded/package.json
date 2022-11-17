@@ -1,11 +1,25 @@
 {
-    "name": "react-multi-threaded",
-    "version": "0.0.4",
+    "name": "react-hooks-multi-threaded",
+    "version": "0.1.4",
     "description": "seperate your react-app into web-workers",
     "main": "lib/index.js",
-    "author": "shmuelhizmi",
+    "author": "wongchichong",
     "license": "MIT",
     "private": false,
+    "keywords": [
+        "webpack",
+        "typescript",
+        "worker",
+        "@emotion",
+        "styled",
+        "threads",
+        "hooks",
+        "react"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wongchichong/react-multi-threaded"
+    },
     "scripts": {
         "prepare": "npm run build",
         "build": "tsc",
