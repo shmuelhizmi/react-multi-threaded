@@ -1,1 +1,1 @@
-### [Refer here](./packages/react-multi-threaded/README.md)
+### [See here](./packages/react-multi-threaded/)
