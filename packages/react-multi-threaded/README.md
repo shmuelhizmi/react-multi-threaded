@@ -313,24 +313,35 @@ the main thread index will be called `index.tsx`
 ## src/index.ts
 
 ```ts
-import React from "react"
+import React, { ReactNode, useEffect, useRef, useState } from "react"
 import { render } from "react-dom"
 import { createRoot } from 'react-dom/client'
-import { Client } from "react-multi-threaded/src"
-import * as Components from "./components/UI"
+import { UI } from "react-multi-threaded/src"
+import { WorkerClient } from "./app.client"
+import { FooterClient } from "./footer.client"
 
-new Worker(new URL('./app.worker', import.meta.url))
+const Content = () => {
+    return <div>
+        <UI>
+            <WorkerClient />
+            <FooterClient />
+        </UI>
+        <UI>
+            <table><tbody>
+                <tr>
+                    <td><FooterClient /></td>
+                    <td><FooterClient /></td>
+                </tr></tbody>
+            </table>
+        </UI>
+
+    </div>
+}
 
 const container = document.getElementById("main")
-const sub = document.getElementById("sub")
 const root = createRoot(container)
-root.render(<Client Components={[...Object.values(Components)]} channel="WorkerApp" />,)
 
-new Worker(new URL('./footer.worker', import.meta.url))
-
-const bdy = createRoot(sub)
-bdy.render(<Client Components={[...Object.values(Components)]} channel="Footer" />,)
-
+root.render(<Content />) 
 ```
 
 that's should be it for the main thread index, let's move on to the web-worker thread index.
@@ -343,7 +354,24 @@ import React from "react"
 import { WorkerRender } from "react-multi-threaded/src/WorkerRender"
 import { WorkerApp } from "./components/Layout/WorkerApp"
 
-WorkerRender(<WorkerApp />, 'WorkerApp')
+export const WorkerAppChannel = 'WorkerApp'
+
+WorkerRender(<WorkerApp />, WorkerAppChannel)
+```
+
+## src/app.client.tsx
+
+```tsx
+import React from "react"
+import * as Components from "./components/UI"
+import { Client, UI } from "react-multi-threaded/src"
+import { WorkerAppChannel } from "./app.worker"
+
+export const WorkerClient = () => {
+    new Worker(new URL('./app.worker', import.meta.url))
+
+    return <Client components={[...Object.values(Components)]} channel={WorkerAppChannel} />
+}
 ```
 
 and 2nd worker, the footer, `footer.worker.tsx` in our example  
@@ -355,7 +383,31 @@ import React from "react"
 import { WorkerRender } from "react-multi-threaded/src/WorkerRender"
 import { Footer } from "./components/UI"
 
-WorkerRender(<Footer />, 'Footer')
+const isWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope
+console.log('Loading footer, isWorker', isWorker)
+
+export const FooterChannel = 'Footer'
+
+WorkerRender(<Footer onTimer={v => {
+    const isWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope
+
+    console.log('isWorker: ', isWorker, v) //run in worker
+}}>
+</Footer>, FooterChannel)
+```
+
+## src/footer.client.tsx
+
+```tsx
+import React from "react"
+import * as Components from "./components/UI"
+import { Client, UI } from "react-multi-threaded/src"
+import { FooterChannel } from "./footer.worker"
+
+export const FooterClient = () => {
+    new Worker(new URL('./footer.worker', import.meta.url))
+    return <Client components={[...Object.values(Components)]} channel={FooterChannel} />
+}
 ```
 
 <b>It is finished, we now have a multi-threaded react app</b>

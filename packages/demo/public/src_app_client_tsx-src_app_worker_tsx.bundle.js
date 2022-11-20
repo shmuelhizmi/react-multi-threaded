@@ -10,13 +10,23 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/app.client.tsx":
+/*!****************************!*\
+  !*** ./src/app.client.tsx ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"WorkerAppChannel\": () => (/* binding */ WorkerAppChannel),\n/* harmony export */   \"WorkerClient\": () => (/* binding */ WorkerClient)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var _components_UI__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/UI */ \"./src/components/UI/index.tsx\");\n/* harmony import */ var react_multi_threaded_src__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-multi-threaded/src */ \"../react-multi-threaded/src/index.ts\");\nvar __spreadArray = (undefined && undefined.__spreadArray) || function (to, from, pack) {\r\n    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {\r\n        if (ar || !(i in from)) {\r\n            if (!ar) ar = Array.prototype.slice.call(from, 0, i);\r\n            ar[i] = from[i];\r\n        }\r\n    }\r\n    return to.concat(ar || Array.prototype.slice.call(from));\r\n};\r\n\r\n// import { WorkerRender } from \"react-multi-threaded/src/WorkerRender\"\r\n// import { WorkerApp } from \"./components/Layout/WorkerApp\"\r\n\r\n\r\nvar WorkerAppChannel = 'WorkerApp';\r\n// WorkerRender(<WorkerApp />, 'WorkerApp')\r\nvar WorkerClient = function () {\r\n    new Worker(new URL(/* worker import */ __webpack_require__.p + __webpack_require__.u(\"src_app_client_tsx-src_app_worker_tsx\"), __webpack_require__.b));\r\n    return react__WEBPACK_IMPORTED_MODULE_0___default().createElement(react_multi_threaded_src__WEBPACK_IMPORTED_MODULE_2__.Client, { components: __spreadArray([], Object.values(_components_UI__WEBPACK_IMPORTED_MODULE_1__), true), channel: WorkerAppChannel });\r\n};\r\n\n\n//# sourceURL=webpack://react-multi-threaded-demo/./src/app.client.tsx?");
+
+/***/ }),
+
 /***/ "./src/app.worker.tsx":
 /*!****************************!*\
   !*** ./src/app.worker.tsx ***!
   \****************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"WorkerAppChannel\": () => (/* binding */ WorkerAppChannel)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_multi_threaded_src_WorkerRender__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-multi-threaded/src/WorkerRender */ \"../react-multi-threaded/src/WorkerRender.tsx\");\n/* harmony import */ var _components_Layout_WorkerApp__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Layout/WorkerApp */ \"./src/components/Layout/WorkerApp.tsx\");\n\r\n\r\n\r\nvar WorkerAppChannel = 'WorkerApp';\r\n(0,react_multi_threaded_src_WorkerRender__WEBPACK_IMPORTED_MODULE_1__.WorkerRender)(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Layout_WorkerApp__WEBPACK_IMPORTED_MODULE_2__.WorkerApp, null), WorkerAppChannel);\r\n\n\n//# sourceURL=webpack://react-multi-threaded-demo/./src/app.worker.tsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_multi_threaded_src_WorkerRender__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-multi-threaded/src/WorkerRender */ \"../react-multi-threaded/src/WorkerRender.tsx\");\n/* harmony import */ var _app_client__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./app.client */ \"./src/app.client.tsx\");\n/* harmony import */ var _components_Layout_WorkerApp__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Layout/WorkerApp */ \"./src/components/Layout/WorkerApp.tsx\");\n\r\n\r\n\r\n\r\n(0,react_multi_threaded_src_WorkerRender__WEBPACK_IMPORTED_MODULE_1__.WorkerRender)(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_Layout_WorkerApp__WEBPACK_IMPORTED_MODULE_3__.WorkerApp, null), _app_client__WEBPACK_IMPORTED_MODULE_2__.WorkerAppChannel);\r\n\n\n//# sourceURL=webpack://react-multi-threaded-demo/./src/app.worker.tsx?");
 
 /***/ }),
 
@@ -66,7 +76,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	__webpack_require__.x = () => {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_emotion_rea-9c8b35","src_components_UI_About_tsx-src_components_UI_Gif_tsx-src_components_UI_Home_tsx-src_componen-0a3d25"], () => (__webpack_require__("./src/app.worker.tsx")))
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_emotion_rea-9c8b35","src_components_UI_index_tsx"], () => (__webpack_require__("./src/app.worker.tsx")))
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};
@@ -209,12 +219,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	
 /******/ 	/* webpack/runtime/importScripts chunk loading */
 /******/ 	(() => {
-/******/ 		// no baseURI
+/******/ 		__webpack_require__.b = self.location + "";
 /******/ 		
 /******/ 		// object to store loaded chunks
 /******/ 		// "1" means "already loaded"
 /******/ 		var installedChunks = {
-/******/ 			"src_app_worker_tsx": 1
+/******/ 			"src_app_client_tsx-src_app_worker_tsx": 1
 /******/ 		};
 /******/ 		
 /******/ 		// importScripts chunk loading
@@ -254,7 +264,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 		__webpack_require__.x = () => {
 /******/ 			return Promise.all([
 /******/ 				__webpack_require__.e("vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_emotion_rea-9c8b35"),
-/******/ 				__webpack_require__.e("src_components_UI_About_tsx-src_components_UI_Gif_tsx-src_components_UI_Home_tsx-src_componen-0a3d25")
+/******/ 				__webpack_require__.e("src_components_UI_index_tsx")
 /******/ 			]).then(next);
 /******/ 		};
 /******/ 	})();

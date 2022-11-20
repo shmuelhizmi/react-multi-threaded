@@ -36,7 +36,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*******************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_multi_threaded_src_WorkerRender__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-multi-threaded/src/WorkerRender */ \"../react-multi-threaded/src/WorkerRender.tsx\");\n/* harmony import */ var _components_UI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/UI */ \"./src/components/UI/index.tsx\");\n\r\n\r\n\r\nvar isWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;\r\nconsole.log('Loading footer, isWorker', isWorker);\r\n(0,react_multi_threaded_src_WorkerRender__WEBPACK_IMPORTED_MODULE_1__.WorkerRender)(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_UI__WEBPACK_IMPORTED_MODULE_2__.Footer, { onTimer: function (v) {\r\n        var isWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;\r\n        console.log('isWorker: ', isWorker, v); //run in worker\r\n    } }), 'Footer');\r\n\n\n//# sourceURL=webpack://react-multi-threaded-demo/./src/footer.worker.tsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"FooterChannel\": () => (/* binding */ FooterChannel)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/* harmony import */ var react_multi_threaded_src_WorkerRender__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react-multi-threaded/src/WorkerRender */ \"../react-multi-threaded/src/WorkerRender.tsx\");\n/* harmony import */ var _components_UI__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/UI */ \"./src/components/UI/index.tsx\");\n\r\n\r\n\r\nvar isWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;\r\nconsole.log('Loading footer, isWorker', isWorker);\r\nvar FooterChannel = 'Footer';\r\n(0,react_multi_threaded_src_WorkerRender__WEBPACK_IMPORTED_MODULE_1__.WorkerRender)(react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_components_UI__WEBPACK_IMPORTED_MODULE_2__.Footer, { onTimer: function (v) {\r\n        var isWorker = typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope;\r\n        console.log('isWorker: ', isWorker, v); //run in worker\r\n    } }), FooterChannel);\r\n\n\n//# sourceURL=webpack://react-multi-threaded-demo/./src/footer.worker.tsx?");
 
 /***/ })
 
@@ -76,7 +76,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /******/ 	__webpack_require__.x = () => {
 /******/ 		// Load entry module and return exports
 /******/ 		// This entry module depends on other loaded chunks and execution need to be delayed
-/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_emotion_rea-d9ed59","src_components_UI_About_tsx-src_components_UI_Gif_tsx-src_components_UI_Home_tsx-src_componen-0a3d25"], () => (__webpack_require__("./src/footer.worker.tsx")))
+/******/ 		var __webpack_exports__ = __webpack_require__.O(undefined, ["vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_emotion_rea-9c8b35","src_components_UI_About_tsx-src_components_UI_Gif_tsx-src_components_UI_Home_tsx-src_componen-0a3d25"], () => (__webpack_require__("./src/footer.worker.tsx")))
 /******/ 		__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
 /******/ 		return __webpack_exports__;
 /******/ 	};
@@ -263,7 +263,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var reac
 /******/ 		var next = __webpack_require__.x;
 /******/ 		__webpack_require__.x = () => {
 /******/ 			return Promise.all([
-/******/ 				__webpack_require__.e("vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_emotion_rea-d9ed59"),
+/******/ 				__webpack_require__.e("vendors-node_modules_emotion_react_dist_emotion-react_browser_esm_js-node_modules_emotion_rea-9c8b35"),
 /******/ 				__webpack_require__.e("src_components_UI_About_tsx-src_components_UI_Gif_tsx-src_components_UI_Home_tsx-src_componen-0a3d25")
 /******/ 			]).then(next);
 /******/ 		};

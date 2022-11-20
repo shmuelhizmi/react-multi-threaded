@@ -1,6 +1,7 @@
-import React, { useCallback, useContext, useEffect, useMemo, useState } from "react"
+import React, { ReactNode, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react"
 import { v4 } from "uuid"
 import { ShareableViewData } from "../WorkerHost"
+import { createRoot } from 'react-dom/client'
 import { AppTransport } from "../types"
 import { createTransport } from "../Transport"
 import { AnyComponent } from "./UIComponent"
@@ -27,13 +28,13 @@ const stringifyWithoutCircular = (json: any) => {
     return JSON.stringify(json, getCircularReplacer())
 }
 
-export const Client = (props: { /* transport?: AppTransport; */channel: string, Components: AnyComponent<any>[] }) => {
+export const Client = (props: { /* transport?: AppTransport; */channel: string, components: AnyComponent<any>[] }) => {
     const [state, setState] = useState<ClientState>({ runningViews: [], })
     // const transport = useMemo(() => props.transport || createTransport(), [])
     const transport = useMemo(() => createTransport(props.channel), [])
     // const context = useContext(ThreadContext) //main
 
-    const UIComponents = useMemo(() => [...props.Components, RootReactMultiThreadedComponent], [])
+    const UIComponents = useMemo(() => [...props.components, RootReactMultiThreadedComponent], [])
 
     useEffect(() => {
         transport.on("update_views_tree", ({ views }: { views: ShareableViewData[] }) => setState({ runningViews: views }))
@@ -108,3 +109,18 @@ export const Client = (props: { /* transport?: AppTransport; */channel: string, 
     return (!root) ? <></> : renderView(root)
 }
 
+export const Register = (props: { channel: string, url: string, components: AnyComponent<any>[] }) => {
+
+}
+
+export const UI = (props: { children: ReactNode | ReactNode[] }) => {
+    const mainRef = useRef<HTMLDivElement>(null)
+    useEffect(() => {
+        if (mainRef.current) {
+            const root = createRoot(mainRef.current)
+            root.render(props.children)
+        }
+    }, [mainRef])
+
+    return <div ref={mainRef}></div>
+}
