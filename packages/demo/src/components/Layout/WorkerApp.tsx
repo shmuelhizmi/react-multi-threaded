@@ -19,7 +19,10 @@ export const WorkerApp = (props: { className?: string }) => {
     const [name, setName] = useState("")
     return <>
         {location === "home" && <>
-            <Home logout={() => setLocation("login")} username={name}>
+            <Home logout={() => {
+                setLocation("login")
+                return null
+            }} username={name}>
 
                 <Gif url="https://upload.wikimedia.org/wikipedia/commons/7/78/GRACE_globe_animation.gif" />
                 <Gif url="https://upload.wikimedia.org/wikipedia/commons/7/78/GRACE_globe_animation.gif" />
@@ -37,6 +40,8 @@ export const WorkerApp = (props: { className?: string }) => {
                     } else {
                         setLocation("error")
                     }
+
+                    return null
                 }}>
 
                 <About />
@@ -50,6 +55,8 @@ export const WorkerApp = (props: { className?: string }) => {
                     console.log("onOK", context) //worker
 
                     setLocation("login")
+
+                    return null
                 }}>
                     <About />
 
