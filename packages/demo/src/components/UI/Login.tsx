@@ -1,36 +1,38 @@
-import React from "react";
-import { UIComponentProps, AsUIComponent } from "react-multi-threaded";
+/** @jsxImportSource @emotion/react */
 
-class Login extends React.Component<
-  UIComponentProps<{ login: (username: string, password: string) => void }>,
-  { username: string; password: string }
-> {
-  state = {
-    username: "",
-    password: "",
-  };
-  render() {
-    return (
-      <div>
+import { css } from '@emotion/react'
+
+import React, { useContext, useState } from "react"
+import { WorkerProps, AsUIComponent } from "react-multi-threaded/src"
+import { ThreadContext } from 'react-multi-threaded/src'
+
+const login = (props: WorkerProps<{ login: (username: string, password: string) => void }>) => {
+    const [username, setUsername] = useState("")
+    const [password, setPassword] = useState("")
+    const context = useContext(ThreadContext)
+
+    return <div>
+        <div css={css`color:red;`}>Login ({context})</div>
+
         <input
-          type="text"
-          onChange={(e) => this.setState({ username: e.target.value })}
-          placeholder="username"
+            type="text"
+            onChange={(e) => { console.log(context); setUsername(e.target.value) }}
+            placeholder="username"
         />
         <input
-          type="text"
-          onChange={(e) => this.setState({ password: e.target.value })}
-          placeholder="password"
+            type="text"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="password"
         />
         <button
-          onClick={() =>
-            this.props.login(this.state.username, this.state.password)
-          }
+            onClick={() =>
+                props.login(username, password)
+            }
         >
-          LogIn
+            LogIn
         </button>
-      </div>
-    );
-  }
+
+        {props?.children}
+    </div>
 }
-export default AsUIComponent(Login);
+export const Login = AsUIComponent(login)

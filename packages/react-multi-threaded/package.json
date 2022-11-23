@@ -1,25 +1,41 @@
 {
-  "name": "react-multi-threaded",
-  "version": "0.0.4",
-  "description": "seperate your react-app into web-workers",
-  "main": "lib/index.js",
-  "author": "shmuelhizmi",
-  "license": "MIT",
-  "private": false,
-  "scripts": {
-    "prepare": "npm run build",
-    "build": "tsc"
-  },
-  "devDependencies": {
-    "@types/react": "16.8.24",
-    "@types/uuid": "3.4.3",
-    "typescript": "4.0.5"
-  },
-  "dependencies": {
-    "@react-fullstack/render": "0.1.23",
-    "uuid": "8.3.0"
-  },
-  "peerDependencies": {
-    "react": ">=16.0.0"
-  }
+    "name": "react-hooks-multi-threaded",
+    "version": "1.0.1",
+    "description": "seperate your react-app into web-workers",
+    "main": "lib/index.js",
+    "author": "wongchichong",
+    "license": "MIT",
+    "private": false,
+    "keywords": [
+        "webpack",
+        "typescript",
+        "worker",
+        "@emotion",
+        "styled",
+        "threads",
+        "hooks",
+        "react"
+    ],
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/wongchichong/react-multi-threaded"
+    },
+    "scripts": {
+        "prepare": "npm run build",
+        "build": "tsc",
+        "watch": "tsc --watch"
+    },
+    "devDependencies": {
+        "@types/uuid": "3.4.3",
+        "typescript": "4.0.5"
+    },
+    "dependencies": {
+        "@react-fullstack/render": "0.1.23",
+        "@types/react": "^18.0.25",
+        "@types/react-dom": "^18.0.9",
+        "react": "^18.2.0",
+        "react-dom": "^18.2.0",
+        "uuid": "8.3.0"
+    },
+    "peerDependencies": {}
 }
